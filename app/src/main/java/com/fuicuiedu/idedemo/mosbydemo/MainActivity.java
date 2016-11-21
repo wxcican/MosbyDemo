@@ -14,7 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainView{
 
     @BindView(R.id.main_lv)
     ListView mainLv;
@@ -53,26 +53,30 @@ public class MainActivity extends AppCompatActivity {
         mainLv.setAdapter(adapter);
     }
 
-//    progressbar 显示
-    public void showPrb(){
-        mainPrb.setVisibility(View.VISIBLE);
-        mainLv.setVisibility(View.GONE);
-    }
-//    * progressbar 隐藏
-    public void hidePrb(){
-        mainPrb.setVisibility(View.GONE);
-        mainLv.setVisibility(View.VISIBLE);
-    }
-//    * setData 设置数据（改变listview）
-    public void setData(List<String> datas){
-        adapter.addAll(datas);
-        adapter.notifyDataSetChanged();
-    }
-
     @OnClick(R.id.main_btn)
     public void onClick() {
         //业务方面
         //点击加载数据
+        //此处依然传mainActivity，但是此时MainActivity是作为接口MainView的实现类而存在的。
+        //当Activity生命周期结束后，仍然会以接口的实现类而存在。
         new MainPresenter(this).loadData();
+    }
+
+    @Override
+    public void showPrb() {
+        mainPrb.setVisibility(View.VISIBLE);
+        mainLv.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void hidePrb() {
+        mainPrb.setVisibility(View.GONE);
+        mainLv.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void setData(List<String> datas) {
+        adapter.addAll(datas);
+        adapter.notifyDataSetChanged();
     }
 }
