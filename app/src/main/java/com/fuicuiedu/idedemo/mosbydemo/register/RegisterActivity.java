@@ -12,7 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements RegisterView{
 
 
     @BindView(R.id.register_prb)
@@ -43,23 +43,24 @@ public class RegisterActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
+    @Override
     public void showPrb() {
         registerPrb.setVisibility(View.VISIBLE);
     }
-
+    @Override
     public void hidePrb() {
         registerPrb.setVisibility(View.GONE);
     }
-
+    @Override
     public void showMsg(String msg) {
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
     }
 
     @OnClick(R.id.register_btn)
     public void onClick() {
+        //当实现接口后，称之为接口的实现类
         new RegisterPresenter(this).register();
 
         finish();
-        System.gc();
     }
 }

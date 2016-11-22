@@ -8,14 +8,14 @@ import android.os.AsyncTask;
 
 public class RegisterPresenter {
 
-    private RegisterActivity registerActivity;
+    private RegisterView registerView;
 
-    public RegisterPresenter(RegisterActivity registerActivity) {
-        this.registerActivity = registerActivity;
+    public RegisterPresenter(RegisterView registerView) {
+        this.registerView = registerView;
     }
 
     public void register(){
-        registerActivity.showPrb();
+        registerView.showPrb();
         new MyAsyncTask().execute();
     }
 
@@ -25,7 +25,6 @@ public class RegisterPresenter {
         protected Void doInBackground(Void... params) {
             try {
                 Thread.sleep(3000);
-                registerActivity = null;
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -35,8 +34,8 @@ public class RegisterPresenter {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            registerActivity.showMsg("注册成功！");
-            registerActivity.hidePrb();
+            registerView.showMsg("注册成功！");
+            registerView.hidePrb();
         }
     }
 }
