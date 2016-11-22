@@ -2,10 +2,6 @@ package com.fuicuiedu.idedemo.mosbydemo.MyMvp;
 
 import android.support.v7.app.AppCompatActivity;
 
-/**
- * Created by Administrator on 2016/11/22 0022.
- */
-
 //因为有抽象方法，所以是抽象类
 public abstract class MyMvpActivity<V extends MyMvpView,
         P extends MyMvpPresenter>
